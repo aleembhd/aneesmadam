@@ -996,12 +996,23 @@ document.addEventListener('DOMContentLoaded', function() {
  * Handles user logout using Firebase Authentication
  */
 function logout() {
+  // Save the remembered credentials before logout
+  const rememberedEmail = localStorage.getItem('rememberedEmail');
+  const rememberedPassword = localStorage.getItem('rememberedPassword');
+  const rememberMe = !!rememberedEmail && !!rememberedPassword;
+  
   // Check if Firebase auth is initialized
   if (firebase.auth) {
     firebase.auth().signOut().then(() => {
-      // Clear any local storage items
+      // Clear localStorage except for remembered credentials
       localStorage.clear();
       sessionStorage.clear();
+      
+      // Restore remembered credentials if needed
+      if (rememberMe) {
+        localStorage.setItem('rememberedEmail', rememberedEmail);
+        localStorage.setItem('rememberedPassword', rememberedPassword);
+      }
       
       // Redirect to login page
       window.location.href = 'index.html';
@@ -1013,6 +1024,13 @@ function logout() {
     // Fallback if Firebase auth is not available
     localStorage.clear();
     sessionStorage.clear();
+    
+    // Restore remembered credentials if needed
+    if (rememberMe) {
+      localStorage.setItem('rememberedEmail', rememberedEmail);
+      localStorage.setItem('rememberedPassword', rememberedPassword);
+    }
+    
     window.location.href = 'index.html';
   }
 }
