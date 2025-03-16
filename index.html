@@ -392,6 +392,64 @@ a:hover {
 
 
 
+        // Add this function to attempt auto-login when page loads
+
+        function attemptAutoLogin() {
+
+            const rememberedEmail = localStorage.getItem('rememberedEmail');
+
+            const rememberedPassword = localStorage.getItem('rememberedPassword');
+
+            const userToken = localStorage.getItem('userToken');
+
+            
+
+            // If we have remembered credentials and the user was previously logged in
+
+            if (rememberedEmail && rememberedPassword && userToken) {
+
+                console.log("Auto-login attempt with stored credentials");
+
+                
+
+                // Attempt login with stored credentials
+
+                signInWithEmailAndPassword(auth, rememberedEmail, rememberedPassword)
+
+                    .then((userCredential) => {
+
+                        const user = userCredential.user;
+
+                        console.log("Auto-login successful:", user);
+
+                        // Redirect to webapp.html
+
+                        window.location.href = "webapp.html";
+
+                    })
+
+                    .catch((error) => {
+
+                        console.error("Auto-login failed:", error.message);
+
+                        // Continue with regular login page if auto-login fails
+
+                        // No need to show an error as this is a background process
+
+                    });
+
+            }
+
+        }
+
+
+
+        // Run auto-login attempt after the page loads
+
+        document.addEventListener('DOMContentLoaded', attemptAutoLogin);
+
+
+
         window.login = function() {
 
             const email = document.getElementById('loginEmail').value;
