@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title>Student Roll Numbers and Names</title>
+
+  <style>
+
+    /* Table Styles */
+
+    /* General Styles */
+
+body {
+
+  margin: 0;
+
+  padding: 20px;
+
+  font-family: Arial, sans-serif;
+
+  background-color: #f9f9f9;
+
+}
+
+
+
+/* Table Styles */
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  border-radius: 5px;
+
+  overflow: hidden; /* Ensures rounded corners */
+
+}
+
+
+
+th, td {
+
+  padding: 15px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #ddd;
+
+}
+
+
+
+th {
+
+  background-color: #007BFF; /* Primary color */
+
+  color: white;
+
+  font-weight: bold;
+
+}
+
+
+
+tr:hover {
+
+  background-color: #f1f1f1; /* Light gray on hover */
+
+}
+
+
+
+/* Responsive Styles */
+
+@media (max-width: 767px) {
+
+  table {
+
+    font-size: 14px;
+
+  }
+
+
+
+  th, td {
+
+    padding: 12px;
+
+  }
+
+}
+
+
+
+@media (max-width: 480px) {
+
+  table {
+
+    font-size: 12px;
+
+  }
+
+
+
+  th, td {
+
+    padding: 10px;
+
+  }
+
+}
+
+/* Add new container styles */
+.table-container {
+    position: fixed;
+    top: 110px; /* Increased to make room for larger controls */
+    left: 0;
+    right: 0;
+    bottom: 60px;
+    overflow-y: auto;
+    background: #ffffff;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+/* Header styles */
+th {
+    position: sticky;
+    top: 0;
+    background-color: #007BFF;
+    color: white;
+    font-size: 28px;  /* Increased header size */
+    padding: 25px 15px;
+    text-align: left;
+    font-weight: 600;
+    z-index: 1;
+}
+
+/* Column styles */
+th:first-child {
+    width: 40%;
+}
+
+th:last-child {
+    width: 60%;
+}
+
+/* Cell styles */
+td {
+    padding: 25px 15px;
+    font-size: 26px;  /* Increased cell text size */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Mobile specific styles */
+@media (max-width: 767px) {
+    /* Roll Number column */
+    td:first-child {
+        color: #000;
+        font-weight: 500;
+        font-size: 26px;  /* Increased roll number size */
+    }
+    
+    /* Name column */
+    td:last-child {
+        color: #000;
+        font-size: 26px;  /* Increased name size */
+    }
+    
+    /* Row sizing */
+    tr {
+        height: calc((100vh - 120px) / 8); /* Showing fewer rows due to larger text */
+        min-height: 100px; /* Increased minimum height */
+    }
+    
+    /* Header text */
+    th {
+        font-size: 28px;  /* Increased header size */
+        padding: 20px 15px;
+    }
+    
+    /* Cell text handling */
+    td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 15px;
+        line-height: 100px; /* Match with min-height */
+    }
+}
+
+/* Zebra striping */
+tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+/* New styles for search bar and controls */
+.controls-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f0f0f0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: auto;
+}
+
+.back-button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 15px 25px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  min-width: 120px;
+  text-align: center;
+}
+
+.back-button:hover {
+  background: #0056b3;
+}
+
+.search-container {
+  flex-grow: 1;
+  position: relative;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 18px 50px 18px 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 24px;
+  box-sizing: border-box;
+  height: 70px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 24px;
+}
+
+/* Mobile adjustments for controls */
+@media (max-width: 767px) {
+  .controls-container {
+    padding: 15px;
+  }
+  
+  .back-button {
+    padding: 12px 20px;
+    font-size: 22px;
+    min-width: 100px;
+  }
+  
+  #searchInput {
+    padding: 15px 45px 15px 15px;
+    font-size: 22px;
+    height: 65px;
+  }
+  
+  .search-icon {
+    font-size: 22px;
+  }
+  
+  .table-container {
+    top: 95px;
+  }
+}
+
+  </style>
+
+  <!-- Existing meta tags -->
+
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+  <link rel="apple-touch-icon" href="images/favicon.ico">
+
+</head>
+
+<body>
+
+  <!-- New controls container -->
+  <div class="controls-container">
+    <button class="back-button" id="backButton">← Back</button>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search by roll number or name...">
+      <span class="search-icon">🔍</span>
+    </div>
+  </div>
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Roll Number</th>
+
+          <th>Name</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+      
+<tr>
+  <td>23WJ1A0401</td>
+  <td>ADAPA CHANDRAHAS</td>
+</tr>
+<tr>
+  <td>23WJ1A0402</td>
+  <td>AIELA NITHIN</td>
+</tr>
+<tr>
+  <td>23WJ1A0404</td>
+  <td>AKULA MANASA</td>
+</tr>
+<tr>
+  <td>23WJ1A0405</td>
+  <td>ALETI RISHITHA</td>
+</tr>
+<tr>
+  <td>23WJ1A0406</td>
+  <td>ALLI RAMCHARAN</td>
+</tr>
+<tr>
+  <td>23WJ1A0407</td>
+  <td>ALWALA NAVYA</td>
+</tr>
+<tr>
+  <td>23WJ1A0408</td>
+  <td>AMARAVAJI SHIVAMANI</td>
+</tr>
+<tr>
+  <td>23WJ1A0409</td>
+  <td>AMGOTH NAVEEN</td>
+</tr>
+<tr>
+  <td>23WJ1A0410</td>
+  <td>AMGOTH SANGEETHA</td>
+</tr>
+<tr>
+  <td>23WJ1A0411</td>
+  <td>ANDAKER SNIGDHA BHARGAVI</td>
+</tr>
+<tr>
+  <td>23WJ1A0412</td>
+  <td>AREPALLY DILEEP</td>
+</tr>
+<tr>
+  <td>23WJ1A0413</td>
+  <td>ARLA SRUTHI</td>
+</tr>
+<tr>
+  <td>23WJ1A0414</td>
+  <td>ARUKALA RANJITH</td>
+</tr>
+<tr>
+  <td>23WJ1A0415</td>
+  <td>ARUMULLA SAI KUMAR</td>
+</tr>
+<tr>
+  <td>23WJ1A0416</td>
+  <td>AVUDODDI RAMESH</td>
+</tr>
+<tr>
+  <td>23WJ1A0417</td>
+  <td>BADAVATH ANJI</td>
+</tr>
+<tr>
+  <td>23WJ1A0418</td>
+  <td>BAIKANI NIKHITHA</td>
+</tr>
+<tr>
+  <td>23WJ1A0419</td>
+  <td>BAIRI SOWMYA</td>
+</tr>
+<tr>
+  <td>23WJ1A0420</td>
+  <td>BANAVATH ARAVIND</td>
+</tr>
+<tr>
+  <td>23WJ1A0421</td>
+  <td>BANDARAI DEVENDAR</td>
+</tr>
+<tr>
+  <td>23WJ1A0422</td>
+  <td>BANDAYYA RAMYA</td>
+</tr>
+<tr>
+  <td>23WJ1A0423</td>
+  <td>BANDI BHARGAV RAM</td>
+</tr>
+<tr>
+  <td>23WJ1A0424</td>
+  <td>BANOTH SHYAM</td>
+</tr>
+<tr>
+  <td>23WJ1A0425</td>
+  <td>BANOTH SOWMYA</td>
+</tr>
+<tr>
+  <td>23WJ1A0427</td>
+  <td>BASAMPELLI ADHARSH</td>
+</tr>
+<tr>
+  <td>23WJ1A0428</td>
+  <td>BATTU ROHINI</td>
+</tr>
+<tr>
+  <td>23WJ1A0429</td>
+  <td>BAZARU SAI RISHIK</td>
+</tr>
+<tr>
+  <td>23WJ1A0430</td>
+  <td>BEGARI NARSIMULU</td>
+</tr>
+<tr>
+  <td>23WJ1A0431</td>
+  <td>BELIDE LAHARI</td>
+</tr>
+<tr>
+  <td>23WJ1A0432</td>
+  <td>BHONGIR THANUJA</td>
+</tr>
+<tr>
+  <td>23WJ1A0433</td>
+  <td>BHUKYA BLESSAN</td>
+</tr>
+<tr>
+  <td>23WJ1A0434</td>
+  <td>BHUKYA UDAYKUMAR</td>
+</tr>
+<tr>
+  <td>23WJ1A0435</td>
+  <td>BHUKYA VARUN KUMAR</td>
+</tr>
+<tr>
+  <td>23WJ1A0436</td>
+  <td>BOLLI RISHIKANTH</td>
+</tr>
+<tr>
+  <td>23WJ1A0437</td>
+  <td>BOMMERA JAHNAVI</td>
+</tr>
+<tr>
+  <td>23WJ1A0438</td>
+  <td>BUDIDHA REVANTH</td>
+</tr>
+<tr>
+  <td>23WJ1A0439</td>
+  <td>BUDIDHA SRISHANTH</td>
+</tr>
+<tr>
+  <td>23WJ1A0440</td>
+  <td>BUDIGE SHASHI VARDHAN BABU</td>
+</tr>
+<tr>
+  <td>23WJ1A0441</td>
+  <td>CHAKALI CHANDU</td>
+</tr>
+<tr>
+  <td>23WJ1A0442</td>
+  <td>CHALLAPALLI VIVEK</td>
+</tr>
+<tr>
+  <td>23WJ1A0443</td>
+  <td>CHEGONI AKHILA</td>
+</tr>
+<tr>
+  <td>23WJ1A0444</td>
+  <td>CHENGOLI GOVARDHAN</td>
+</tr>
+<tr>
+  <td>23WJ1A0445</td>
+  <td>CHEPURI LAXMI SAHITHI</td>
+</tr>
+<tr>
+  <td>23WJ1A0446</td>
+  <td>CHETTI ARUN SAI</td>
+</tr>
+<tr>
+  <td>23WJ1A0447</td>
+  <td>CHILUKANI POOJITHA REDDY</td>
+</tr>
+<tr>
+  <td>23WJ1A0448</td>
+  <td>CHINDAM SAI CHARAN</td>
+</tr>
+<tr>
+  <td>23WJ1A0449</td>
+  <td>CHINNOLLA AJAY REDDY</td>
+</tr>
+<tr>
+  <td>23WJ1A0450</td>
+  <td>CHITYALA KARTHIK REDDY</td>
+</tr>
+<tr>
+  <td>23WJ1A0451</td>
+  <td>DANDU SWETHA</td>
+</tr>
+<tr>
+  <td>23WJ1A0452</td>
+  <td>DASARI DIVYA</td>
+</tr>
+<tr>
+  <td>23WJ1A0453</td>
+  <td>DASARI SHIVA KUMAR</td>
+</tr>
+<tr>
+  <td>23WJ1A0454</td>
+  <td>DEPAVATH VAMSHI KRISHNA</td>
+</tr>
+<tr>
+  <td>23WJ1A0455</td>
+  <td>DEVARAKONDA SAI CHARAN</td>
+</tr>
+<tr>
+  <td>23WJ1A0456</td>
+  <td>DEVIREDDY KALPANA</td>
+</tr>
+<tr>
+  <td>23WJ1A0457</td>
+  <td>DONKANA SAMPATH KUMAR</td>
+</tr>
+<tr>
+  <td>22WJ1A0435</td>
+  <td>BHUKYA ESHWAR</td>
+</tr>
+<tr>
+  <td>22WJ1A0419</td>
+  <td>B CHARAN</td>
+</tr>
+<tr>
+  <td>24WJ5A0401</td>
+  <td>ALUGAM VINAY</td>
+</tr>
+<tr>
+  <td>24WJ5A0402</td>
+  <td>AVULA SATHWIK</td>
+</tr>
+<tr>
+  <td>24WJ5A0403</td>
+  <td>B NITHISHA</td>
+</tr>
+<tr>
+  <td>24WJ5A0404</td>
+  <td>BHUKYA DHARANI</td>
+</tr>
+<tr>
+  <td>24WJ5A0405</td>
+  <td>BITLA POOJA</td>
+</tr>
+<tr>
+  <td>24WJ5A0406</td>
+  <td>BODA SUPRAJ KUMAR</td>
+</tr>
+<tr>
+  <td>24WJ5A0407</td>
+  <td>DHARAVATH POOJA</td>
+</tr>
+<tr>
+  <td>24WJ5A0408</td>
+  <td>GOWRISETTY HARSHA VARDHAN</td>
+</tr>
+<tr>
+  <td>22WJ1A04B4</td>
+  <td>JANGILI MAHESH</td>
+</tr>
+
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <div class="bottom-navbar">
+    <!-- ... existing navigation ... -->
+  </div>
+
+  <script>
+
+    function openStudentsPage() {
+
+  window.open('students.html', '_blank');
+
+}
+
+
+
+// Add this to your existing DOMContentLoaded event listener
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  // ... your existing code ...
+
+
+
+  // Add event listener for the Students button
+
+  document.getElementById('studentsBtn').addEventListener('click', openStudentsPage);
+
+});
+
+// Back button functionality
+document.getElementById('backButton').addEventListener('click', function() {
+  window.location.href = 'webapp.html';
+});
+
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const tableRows = document.querySelectorAll('tbody tr');
+  
+  tableRows.forEach(row => {
+    const rollNumber = row.querySelector('td:first-child').textContent.toLowerCase();
+    const name = row.querySelector('td:last-child').textContent.toLowerCase();
+    
+    if (rollNumber.includes(searchTerm) || name.includes(searchTerm)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+});
+
+  </script>
+
+</body>
+
+</html>
+
+
