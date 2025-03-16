@@ -384,9 +384,7 @@ const students = [
     tableHtml += `
         </tbody>
       </table>
-      <div style="text-align: center; margin-top: 20px;">
-        <!-- <p>© 2024 Croxton Technologies. All rights reserved.</p> -->
-      </div>
+    
     `;
   
     return tableHtml;
@@ -456,9 +454,7 @@ const students = [
                <p>Date Range: ${startDate} to ${endDate}</p>
              </div>
              ${printContent}
-             <div class="footer">
-               <p>© 2024 Croxton Technologies Hyderabad India. All rights reserved.</p>
-             </div>
+             
              <div class="no-print" style="text-align: center; margin-top: 20px;">
                <button onclick="window.print()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; margin: 5px; cursor: pointer;">Print</button>
                <button onclick="downloadCSV()" style="background-color: #008CBA; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; margin: 5px; cursor: pointer;">Download CSV</button>
