@@ -274,10 +274,8 @@ const students = [
      crProfiles.innerHTML = ''; // Clear existing profiles
    
      const crs = [
-      { name: 'YASHWANTH SAI', rollNumber: '22WJ1A04X9', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
-      { name: 'SANTHOSH', rollNumber: '22WJ1A04Z1', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
-      { name: 'PUSHPA SHREE', rollNumber: '22WJ1A04W4', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
-      { name: 'ANUSHA', rollNumber: '22WJ1A04W3', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
+      { name: '', rollNumber: '', email: '', photo: '' },
+    
     ];
    
      crs.forEach(cr => {
