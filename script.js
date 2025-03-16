@@ -274,8 +274,10 @@ const students = [
      crProfiles.innerHTML = ''; // Clear existing profiles
    
      const crs = [
-      { name: '', rollNumber: '', email: '', photo: '' },
-      
+      { name: 'YASHWANTH SAI', rollNumber: '22WJ1A04X9', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
+      { name: 'SANTHOSH', rollNumber: '22WJ1A04Z1', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
+      { name: 'PUSHPA SHREE', rollNumber: '22WJ1A04W4', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
+      { name: 'ANUSHA', rollNumber: '22WJ1A04W3', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
     ];
    
      crs.forEach(cr => {
@@ -382,7 +384,9 @@ const students = [
     tableHtml += `
         </tbody>
       </table>
-    
+      <div style="text-align: center; margin-top: 20px;">
+       
+      </div>
     `;
   
     return tableHtml;
@@ -452,7 +456,9 @@ const students = [
                <p>Date Range: ${startDate} to ${endDate}</p>
              </div>
              ${printContent}
-             
+             <div class="footer">
+               
+             </div>
              <div class="no-print" style="text-align: center; margin-top: 20px;">
                <button onclick="window.print()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; margin: 5px; cursor: pointer;">Print</button>
                <button onclick="downloadCSV()" style="background-color: #008CBA; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; margin: 5px; cursor: pointer;">Download CSV</button>
@@ -985,3 +991,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+/**
+ * Handles user logout using Firebase Authentication
+ */
+function logout() {
+  // Check if Firebase auth is initialized
+  if (firebase.auth) {
+    firebase.auth().signOut().then(() => {
+      // Clear any local storage items
+      localStorage.clear();
+      sessionStorage.clear();
+      
+      // Redirect to login page
+      window.location.href = 'index.html';
+    }).catch((error) => {
+      console.error('Logout error:', error);
+      alert('Failed to log out. Please try again.');
+    });
+  } else {
+    // Fallback if Firebase auth is not available
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = 'index.html';
+  }
+}
