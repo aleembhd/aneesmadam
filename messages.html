@@ -584,23 +584,31 @@
         
         // Function to clear all logs with confirmation
         function clearAllLogs() {
-            if (confirm('Are you sure you want to clear all message logs? This action cannot be undone.')) {
+            // Show a more specific confirmation message
+            if (confirm('Are you sure you want to clear all message logs for Md Anees? This action cannot be undone.')) {
                 // Show loading indicator
                 document.getElementById('loadingIndicator').style.display = 'block';
                 document.getElementById('tableContainer').style.display = 'none';
                 
-                // Clear logs from Firebase
-                database.ref('messageLogs').remove()
+                // Clear logs from the correct Firebase path for this faculty
+                const FACULTY_NAME = "Md_Anees";
+                database.ref(`faculty/${FACULTY_NAME}`).remove()
                     .then(() => {
+                        // Clear local data too
                         allLogs = [];
+                        localStorage.removeItem('cachedMessageLogs');
+                        localStorage.removeItem('messageCacheTimestamp');
+                        
                         document.getElementById('loadingIndicator').style.display = 'none';
                         displayLogs(allLogs);
-                        alert('All message logs have been cleared.');
+                        
+                        // Show a specific success message
+                        alert(`Message logs for faculty ${FACULTY_NAME.replace('_', ' ')} have been successfully cleared.`);
                     })
                     .catch(error => {
                         console.error('Error clearing logs:', error);
                         document.getElementById('loadingIndicator').style.display = 'none';
-                        alert('Error clearing message logs. Please try again later.');
+                        alert(`Error clearing message logs: ${error.message}. Please try again later.`);
                     });
             }
         }
