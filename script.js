@@ -274,7 +274,8 @@ const students = [
      crProfiles.innerHTML = ''; // Clear existing profiles
    
      const crs = [
-      { name: 'YASHWANTH SAI', rollNumber: '22WJ1A04X9', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
+      { name: 'Chandu', rollNumber: '23WJ1A0441', email: '', photo: '' },
+      { name: 'SHIVAMANI', rollNumber: '23WJ1A0408', email: '', photo: '' },
       
     ];
    
