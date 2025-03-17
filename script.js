@@ -274,8 +274,8 @@ const students = [
      crProfiles.innerHTML = ''; // Clear existing profiles
    
      const crs = [
-      { name: '', rollNumber: '', email: '', photo: '' },
-    
+      { name: 'YASHWANTH SAI', rollNumber: '22WJ1A04X9', email: '', photo: 'https://i.ibb.co/6XNHkhv/image.png' },
+      
     ];
    
      crs.forEach(cr => {
@@ -307,7 +307,7 @@ const students = [
      const endDate = new Date(document.getElementById('endDate').value);
      endDate.setHours(23, 59, 59, 999); // Set to end of day
 
-     // Change this to use faculty-specific path
+     // This path is correct - it's using the faculty-specific path
      return firebase.database().ref(`faculty/${FACULTY_NAME}`).once('value')
        .then(snapshot => {
          const messages = [];
@@ -450,7 +450,7 @@ const students = [
            </head>
            <body>
              <div class="header">
-             
+               <h2>${DISPLAY_FACULTY_NAME} - Message Logs Report</h2>
                <p>Date Range: ${startDate} to ${endDate}</p>
              </div>
              ${printContent}
